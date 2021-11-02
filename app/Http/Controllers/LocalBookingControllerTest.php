@@ -10,12 +10,12 @@ use GuzzleHttp\Middleware;
 
 use DateTime;
 
-class LocalBookingController extends Controller
+class LocalBookingControllerTest extends Controller
 {
     public function __construct() {
         $this->client = new \GuzzleHttp\Client(
             [
-             'base_uri' => 'https://lbcobapisrv2.azurewebsites.net/api/RetailDomesticBooking', 
+             'base_uri' => 'http://dwebsrv02.lbcapps.com/onlinebookingdev/api/RetailDomesticBooking', 
              'http_errors' => false, 
              'headers' => 
                 [ 

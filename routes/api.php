@@ -4,7 +4,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocalBookingController;
+use App\Http\Controllers\LocalBookingControllerTest;
 use App\Http\Controllers\CbmController;
+use App\Http\Controllers\getDateTimeNow;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +24,14 @@ use App\Http\Controllers\CbmController;
 // });
 
 Route::post('/v1/booking/local', [LocalBookingController::class, 'convertPayload'])->middleware('log.request');
+Route::post('/v1/booking/local/test', [LocalBookingControllerTest::class, 'convertPayload'])->middleware('log.request');
 
-Route::get('/v1/booking/cbm', [CbmController::class, 'computeCbm'])->middleware('log.request');
+Route::get('/v1/booking/local/cbm', [CbmController::class, 'computeCbmLocal'])->middleware('log.request');
+
+Route::get('/v1/booking/international/cbm', [CbmController::class, 'computeCbmInternational'])->middleware('log.request');
+
+Route::get('/v1/booking/getNow', [getDateTimeNow::class, 'getNow'])->middleware('log.request');
 
 Route::fallback(function(){
-    return response()->json([
-        'message' => 'Endpoint not found.'], 404);
+    return response()->json(['message' => 'Endpoint not found.'], 404);
 });

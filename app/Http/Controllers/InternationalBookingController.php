@@ -17,6 +17,7 @@ class InternationalBookingController extends Controller
              'http_errors' => false, 
              'headers' => 
                 [ 
+                    'Authorization' => 'Basic TEJDRXhwcmVzc09ubGluZUJvb2tpbmdJbnQ6a25zZGY2NkRTRkdTNmFzZFZGNlNBNjY0U0E=',
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json'
                 ]
@@ -61,8 +62,12 @@ class InternationalBookingController extends Controller
         );
         
         $status_code = $response->getStatusCode();
-        
-        if ($status_code) {
+        //send response back to process
+        if ($status_code == 200) {
+            return response()->json(json_decode($response->getBody()->getContents()), $status_code);
+        } elseif ($status_code == 408) {
+            return response()->json(['message' => 'Request to LBC has timed out.'], 408);
+        } else {
             return response()->json(json_decode($response->getBody()->getContents()), $status_code);
         }
     }
