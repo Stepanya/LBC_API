@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocalBookingController;
 use App\Http\Controllers\LocalBookingControllerTest;
+use App\Http\Controllers\LocalBookingControllerCorpTest;
+use App\Http\Controllers\LocalBookingCorpGetCustomer;
 use App\Http\Controllers\CbmController;
 use App\Http\Controllers\getDateTimeNow;
 
@@ -25,6 +27,8 @@ use App\Http\Controllers\getDateTimeNow;
 
 Route::post('/v1/booking/local', [LocalBookingController::class, 'convertPayload'])->middleware('log.request');
 Route::post('/v1/booking/local/test', [LocalBookingControllerTest::class, 'convertPayload'])->middleware('log.request');
+Route::post('/v1/booking/local/corp/test', [LocalBookingControllerCorpTest::class, 'convertPayload'])->middleware('log.request');
+Route::get('/v1/booking/local/corp/get_customer', [LocalBookingCorpGetCustomer::class, 'sendToLBC'])->middleware('log.request');
 
 Route::get('/v1/booking/local/cbm', [CbmController::class, 'computeCbmLocal'])->middleware('log.request');
 
