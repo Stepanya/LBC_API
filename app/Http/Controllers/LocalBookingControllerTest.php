@@ -30,7 +30,7 @@ class LocalBookingControllerTest extends Controller
 
 
         if (!$request->filled('ShipmentMode')) {
-            return response()->json(['message' => 'Shipment mode cannot be empty. '], 200);
+            return response()->json(['message' => 'Shipment mode cannot be empty. '], 500);
         }    
         // Casts the parameters to it's proper type
         $request->merge([
