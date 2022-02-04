@@ -45,7 +45,8 @@ class InternationalBookingSortProducts extends Controller
 
         foreach($response_body as $key => &$Product) {
             
-            if($Product['ProductLineId'] == $request->ProductLineId) {
+            if($Product['ProductLineId'] == $request->ProductLineId 
+                && $Product['ShipmentModeId'] == $request->ShipmentModeId) {
                 array_push($response, $Product);
             }
             
